@@ -1,0 +1,18 @@
+description: >
+  Generates a set of pipeline parameters from `mapping` at
+  `output-path`.
+
+parameters:
+  mapping:
+    type: string
+    default: ""
+    description: >
+      Mapping of path regular expressions to pipeline parameters and
+      values. One mapping per line, whitespace-delimited.
+
+steps:
+  - run:
+      environment:
+        PARAM: e2e
+      name: Set parameters
+      command: <<include(scripts/gitlogchecker.sh)>>

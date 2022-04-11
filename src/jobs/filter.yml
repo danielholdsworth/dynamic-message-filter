@@ -1,0 +1,32 @@
+description: >
+  Continues a pipeline in the `setup` state based with static config
+  and a set of pipeline parameters based on the changes in this push.
+
+executor: default
+
+resource_class: << parameters.resource_class >>
+
+parameters:
+  config-path:
+    type: string
+    default: ".circleci/continue_config.yml"
+    description: >
+      The location of the config to continue the pipeline with.
+  circleci_domain:
+    type: string
+    description: "The domain of the CircleCI installation - defaults to circleci.com. (Only necessary for CircleCI Server users)"
+    default: "circleci.com"
+  resource_class:
+    type: string
+    description: "Resource class to use"
+    default: "small"
+
+steps:
+  - checkout
+  #- set-parameters:
+      #param: e2e
+  - continuation/continue:
+      configuration_path: << parameters.config-path >>
+      parameters: |
+        {"auth": true}
+      circleci_domain: << parameters.circleci_domain >>

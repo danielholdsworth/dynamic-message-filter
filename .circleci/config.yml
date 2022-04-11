@@ -1,10 +1,8 @@
 version: 2.1
 
 orbs:
-  # Replace this with your own!
-  dynamic-message-filter: danielholdsworth/dynamic-message-filter@<<pipeline.parameters.dev-orb-version>>
+  path-filtering: circleci/path-filtering@<<pipeline.parameters.dev-orb-version>>
   orb-tools: circleci/orb-tools@10.0
-  bats: circleci/bats@1.0
   shellcheck: circleci/shellcheck@2.0
 
 # Pipeline Parameters
@@ -29,10 +27,7 @@ jobs:
       - image: cimg/base:stable
     steps:
       - checkout
-      # "greet" is a sample command packaged with this orb config.
-      # This sample integration test will run as long as the greet command exists. Once you remove the greet command you should remove this line.
-      # Push new changes first, before adding new tests to your config.
-      - dynamic-message-filter/greet
+      # TODO This.
 
 workflows:
   # Prior to producing a development orb (which requires credentials) basic validation, linting, and even unit testing can be performed.
@@ -45,18 +40,20 @@ workflows:
       - shellcheck/check:
           dir: ./src/scripts
           exclude: SC2148
-      # optional: Run BATS tests against your scripts
-      - bats/run:
-          path: ./src/tests
-      # Publish development version(s) of the orb.
-      - orb-tools/publish-dev:
-          orb-name: danielholdsworth/dynamic-message-filter
-          context: orb-publishing # A restricted context containing your private publishing credentials. Will only execute if approved by an authorized user.
+      # If you accept building open source forks, protect your secrects behind a restricted context.
+      # A job containing restricted context (which holds your orb publishing credentials) may only be accessed by a user with proper permissions.
+      # An open source user may begin a pipeline with a PR, and once the pipeline is approved by an authorized user at this point, the pipeline will continue with the proper context permissions.
+      - hold-for-dev-publish:
+          type: approval
           requires:
             - orb-tools/lint
             - orb-tools/pack
-            - bats/run
             - shellcheck/check
+      # Publish development version(s) of the orb.
+      - orb-tools/publish-dev:
+          orb-name: circleci/path-filtering
+          context: orb-publishing
+          requires: [hold-for-dev-publish]
       # Trigger an integration workflow to test the
       # dev:${CIRCLE_SHA1:0:7} version of your orb
       - orb-tools/trigger-integration-tests-workflow:
@@ -81,7 +78,7 @@ workflows:
       # be skipped.
       # e.g. [semver:patch] will cause a patch version to be published.
       - orb-tools/dev-promote-prod-from-commit-subject:
-          orb-name: danielholdsworth/dynamic-message-filter
+          orb-name: circleci/path-filtering
           context: orb-publishing
           add-pr-comment: false
           fail-if-semver-not-indicated: true
