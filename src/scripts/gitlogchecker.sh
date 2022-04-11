@@ -1,13 +1,8 @@
 #!/bin/bash
 
-#GIT_COMMIT_MSG=$(git log --pretty=oneline -n 1)
-GIT_COMMIT_MSG="3e0060fbff8b10c673879bd7991ff477592a9adf (HEAD -> alpha, origin/alpha) testing what [api][auth]"
+GIT_COMMIT_MSG=$(git log --pretty=oneline -n 1)
 
 PARAM_FILE="/tmp/pipeline-parameters.json"
-
-PARAM="e2e
-api
-auth"
 
 while IFS= read -r line; do
   if [[ $GIT_COMMIT_MSG == *"[$line]"* ]]; then
@@ -29,3 +24,4 @@ fi
 if [ "$IS_TRIGGERED" = false ]; then
   echo '{}' >> /tmp/pipeline-parameters.json
 fi
+cat /tmp/pipeline-parameters.json
