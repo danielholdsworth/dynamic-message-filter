@@ -7,12 +7,11 @@ parameters:
     type: string
     default: ""
     description: >
-      Mapping of path regular expressions to pipeline parameters and
-      values. One mapping per line, whitespace-delimited.
+      Simple list of params, name only, no values.
 
 steps:
   - run:
       environment:
-        PARAM: e2e
+        PARAM: << parameters.mapping >>
       name: Set parameters
       command: <<include(scripts/gitlogchecker.sh)>>
