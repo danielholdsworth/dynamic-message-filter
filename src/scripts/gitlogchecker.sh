@@ -19,16 +19,13 @@ while IFS= read -r line; do
 done <<< "$PARAM"
 
 filesize=$(wc -c <"$PARAM_FILE" | xargs)
-echo $filesize
 
-if [ $filesize > "3" ]; then
+if [ "$filesize" > "3" ]; then
   IS_TRIGGERED=true
 else
   IS_TRIGGERED=false
 fi
 
-echo $IS_TRIGGERED
-
-if [ IS_TRIGGERED = false ]; then
+if [ "$IS_TRIGGERED" = false ]; then
   echo '{}' >> /tmp/pipeline-parameters.json
 fi
