@@ -24,4 +24,3 @@ fi
 if [ "$IS_TRIGGERED" = false ]; then
   echo '{}' >> /tmp/pipeline-parameters.json
 fi
-cat /tmp/pipeline-parameters.json
