@@ -1,9 +1,8 @@
 #!/bin/bash
 
-#GIT_COMMIT_MSG=$(git log --pretty=oneline -n 1)
+GIT_COMMIT_MSG=$(git log --pretty=oneline -n 1)
 
-#if [[ $GIT_COMMIT_MSG == *"[e2e]"* ]]; then
-  #echo "Continuation Requested!"
-  #$PARAM = {"e2e":true}
-#fi
-echo '{"'"$PARAM"'":true}' > /tmp/pipeline-parameters.json
+if [[ $GIT_COMMIT_MSG == *"[$PARAM]"* ]]; then
+  echo "Continuation Requested!"
+  echo '{"'"$PARAM"'":true}' > /tmp/pipeline-parameters.json
+fi
