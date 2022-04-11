@@ -31,6 +31,7 @@ steps:
   - checkout
   - set-parameters:
       mapping: << parameters.mapping >>
+  - run: echo << parameters.mapping >>
   - continuation/continue:
       configuration_path: << parameters.config-path >>
       parameters: "/tmp/pipeline-parameters.json"
