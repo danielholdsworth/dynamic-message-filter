@@ -20,7 +20,7 @@ done <<< "$PARAM"
 
 filesize=$(wc -c <"$PARAM_FILE" | xargs)
 
-if [ "$filesize" > "3" ]; then
+if [ "$filesize" -gt 3 ]; then
   IS_TRIGGERED=true
 else
   IS_TRIGGERED=false
