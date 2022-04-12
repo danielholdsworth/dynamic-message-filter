@@ -2,6 +2,7 @@
 
 GIT_COMMIT_MSG=$(git log --pretty=oneline -n 1)
 PARAM_FILE="/tmp/pipeline-parameters.json"
+touch /tmp/pipeline-parameters.json
 
 while IFS= read -r line; do
   if [[ $GIT_COMMIT_MSG == *"[$line]"* ]]; then
@@ -31,5 +32,5 @@ if [ "$linesinfile" -gt 1 ]; then
 fi
 
 if [ "$IS_TRIGGERED" = false ]; then
-  echo '{}' >> /tmp/pipeline-parameters.json
+  echo '{}' > /tmp/pipeline-parameters.json
 fi
