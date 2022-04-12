@@ -23,10 +23,10 @@ fi
 
 if [ "$linesinfile" -gt 1 ]; then
   #add logic to recreate file
-  sed -i '' 's/:/: /g' "$PARAM_FILE" # add whitespace after colon
-  sed -i '' 's/[{}]//g' "$PARAM_FILE" # remove all braces
-  sed -i '' s/$/,/ "$PARAM_FILE"; sed -i '' '$ s/.$//' "$PARAM_FILE" # add , to end of files then remove from last
-  sed -i '' '1s/^/{\n/' "$PARAM_FILE" # add { on first line
+  sed -i 's/:/: /g' "$PARAM_FILE" # add whitespace after colon
+  sed -i 's/[{}]//g' "$PARAM_FILE" # remove all braces
+  sed -i s/$/,/ "$PARAM_FILE"; sed -i '$ s/.$//' "$PARAM_FILE" # add , to end of files then remove from last
+  sed -i '1s/^/{\n/' "$PARAM_FILE" # add { on first line
   echo "}" >> "$PARAM_FILE" # add } to end of file
 fi
 
