@@ -38,8 +38,7 @@ if [ "$linesinfile" -gt 1 ]; then
   sed -i 's/:/: /g' "$PARAM_FILE" # add whitespace after colon
   sed -i 's/[{}]//g' "$PARAM_FILE" # remove all braces
   sed -i s/$/,/ "$PARAM_FILE"; sed -i '$ s/.$//' "$PARAM_FILE" # add , to end of files then remove from last
-  sed -i '1s/^/{\n/' "$PARAM_FILE" # add { on first line
-  echo "}" >> "$PARAM_FILE" # add } to end of file
+  sed -i '1s/^/{\n/' "$PARAM_FILE"; echo "}" >> "$PARAM_FILE" # add braces around object
 fi
 
 # If IS_TRIGGERED is false then write the default {}
