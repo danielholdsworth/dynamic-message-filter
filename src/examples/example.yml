@@ -1,6 +1,7 @@
 description: >
   Continue a pipeline from the setup phase with supplied configuration
-  and pipeline parameters generated from the files changed.
+  and pipeline parameters generated from git commit message.
+  example commit message - "inital commit [e2e][auth]"
 usage:
   version: 2.1
   setup: true

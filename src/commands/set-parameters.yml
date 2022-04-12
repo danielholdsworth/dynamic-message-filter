@@ -1,6 +1,5 @@
 description: >
-  Generates a set of pipeline parameters from `mapping` at
-  `output-path`.
+  Generates a file containing JSON pipeline params.
 
 parameters:
   mapping:
