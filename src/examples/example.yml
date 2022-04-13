@@ -1,13 +1,17 @@
 description: >
-  Sample example description.
-# Provide a use-case based example for using this orb.
-# Everything in the `usage` section will be displayed in the orb registry.
-# Comments are not retained.
+  Continue a pipeline from the setup phase with supplied configuration
+  and pipeline parameters generated from git commit message.
+  example commit message - "inital commit [e2e][auth]"
 usage:
   version: 2.1
+  setup: true
   orbs:
-    <orb-name>: <namespace>/<orb-name>@1.2.3
+    dynamic-message-filter: danielholdsworth/dynamic-message-filter@1.0.0
   workflows:
-    use-my-orb:
+    generate-config:
       jobs:
-        - <orb-name>/<job-name>
+        - path-filtering/filter:
+            config-path: .circleci/continue-config.yml
+            mapping: |
+              e2e
+              auth

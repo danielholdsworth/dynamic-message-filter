@@ -1,0 +1,16 @@
+description: >
+  Generates a file containing JSON pipeline params.
+
+parameters:
+  mapping:
+    type: string
+    default: ""
+    description: >
+      Simple list of params, name only, no values.
+
+steps:
+  - run:
+      environment:
+        PARAM: << parameters.mapping >>
+      name: Set parameters
+      command: <<include(scripts/gitlogchecker.sh)>>
