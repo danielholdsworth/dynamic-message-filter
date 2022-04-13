@@ -23,6 +23,7 @@ workflows:
       - orb-tools/publish:
           orb-name: danielholdsworth/dynamic-message-filter
           vcs-type: << pipeline.project.type >>
+          pub-type: production
           requires:
             [orb-tools/lint, orb-tools/review, orb-tools/pack, shellcheck/check]
           context: orb-publishing #not sure if correct
