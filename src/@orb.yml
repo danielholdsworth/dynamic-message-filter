@@ -1,7 +1,7 @@
 version: 2.1
 
 description: >
-  Continue a pipeline based on paths of changed files.
+  Continue a workflow based on parameters defined in your git commit message.
 display:
   home_url: "https://github.com/danielholdsworth/dynamic-message-filter"
   source_url: "https://github.com/danielholdsworth/dynamic-message-filter"
