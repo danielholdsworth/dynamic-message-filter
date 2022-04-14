@@ -5,6 +5,8 @@
 
 A CircleCI Orb that allows you to control setup workflows with your Git commit messages! [Orb-Tools](https://circleci.com/orbs/registry/orb/circleci/orb-tools).
 
+Example Project using this orb [Dynamic Config Demo](https://github.com/danielholdsworth/dynamic_config_demo)
+
 Additional READMEs are available in each directory.
 
 For further questions/comments about this or other orbs, visit the Orb Category of [CircleCI Discuss](https://discuss.circleci.com/c/orbs).
